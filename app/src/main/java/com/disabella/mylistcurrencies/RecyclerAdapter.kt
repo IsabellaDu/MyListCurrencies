@@ -39,7 +39,7 @@ class RecyclerAdapter(private val items: List<ExchangeRate>) :
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         items[position].apply {
-            viewHolder.title.text = "$currency: $saleRateNB \n"
+            viewHolder.title.text = "$currency: $saleRateNB"
             viewHolder.icon.setBackgroundColor(randomColor())
         }
     }
