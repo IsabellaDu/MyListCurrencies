@@ -12,20 +12,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val title = findViewById<TextView>(R.id.title)
         val gson = GsonBuilder().create()
         val data = gson.fromJson(jsonSample, PrivatApi::class.java)
 
-        /*val list: List<ExchangeRate> = data.exchangeRate ?: emptyList()
-        var result = ""
-        list.forEach {
-            result += "${it.currency}: ${it.saleRateNB}\n"
-        }
-        title.text = result*/
-
         val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = RecyclerAdapter(data)
+        recyclerView.adapter = RecyclerAdapter(data.exchangeRate ?: emptyList())
 
 
     }

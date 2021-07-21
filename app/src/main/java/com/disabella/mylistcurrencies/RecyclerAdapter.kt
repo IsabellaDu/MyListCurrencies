@@ -1,5 +1,6 @@
 package com.disabella.mylistcurrencies
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -12,13 +13,12 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class RecyclerAdapter() :
+class RecyclerAdapter(private val items: List<ExchangeRate>) :
     RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val title: TextView = view.findViewById(R.id.title)
 
-        //val subTitle: TextView = view.findViewById(R.id.subtitle)
         val icon: FrameLayout = view.findViewById(R.id.icon)
 
         init {
@@ -36,10 +36,10 @@ class RecyclerAdapter() :
         return ViewHolder(view)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         items[position].apply {
-            viewHolder.title.text = "some text"
-            //viewHolder.subTitle.text = subtitle
+            viewHolder.title.text = "$currency: $saleRateNB \n"
             viewHolder.icon.setBackgroundColor(randomColor())
         }
     }
@@ -52,5 +52,6 @@ fun randomColor(): Int =
         Random.nextInt(256),
         Random.nextInt(256)
     )
+
 fun Context.toast(message: CharSequence) =
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
